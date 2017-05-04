@@ -21,23 +21,35 @@ let g:loaded_linuxsty = 1
 if !exists("g:linuxsty_disabled")
     let g:linuxsty_disabled=0
 endif
-if g:linuxsty_disabled
-    finish
-endif
 
-set wildignore+=*.ko,*.mod.c,*.order,modules.builtin
+"set wildignore+=*.ko,*.mod.c,*.order,modules.builtin
 
 augroup linuxsty
     autocmd!
 
     autocmd FileType c,cpp call s:LinuxConfigure()
-    autocmd FileType diff setlocal ts=8
-    autocmd FileType kconfig setlocal ts=8 sw=8 sts=8 noet
-    autocmd FileType dts setlocal ts=8 sw=8 sts=8 noet
+    autocmd FileType diff call s:LinuxConfigureDiff()
+    autocmd FileType kconfig,dts call s:LinuxConfigOther()
 augroup END
+
+function s:LinuxConfigDiff()
+    if !g:linuxsty_disabled
+        setlocal ts=8
+    endif
+endfunction
+
+function s:LinuxConfigOther()
+    if !g:linuxsty_disabled
+        setlocal ts=8 sw=8 sts=8 noet
+    endif
+endfunction
 
 function s:LinuxConfigure()
     let apply_style = 0
+
+    if !g:linuxsty_disabled
+        let apply_style = 1
+    endif
 
     if exists("g:linuxsty_patterns")
         let path = expand('%:p')
