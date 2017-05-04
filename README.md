@@ -23,7 +23,10 @@ Alternatively you can use the Git repository with a manager such as
 ## Usage
 
 By default the Linux coding style is enabled for any file known to the Linux 
-project (C files, headers, patches, Kconfig, etc.).
+project (C files, headers, patches, Kconfig, etc.). You can disable it in your
+vimrc:
+
+    let g:linuxsty_disabled=1
 
 If you prefer a finer control and apply it only on some files, define 
 a "g:linuxsty_patterns" array in your vimrc and the style will be applied only 

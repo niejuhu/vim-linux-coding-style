@@ -18,6 +18,13 @@ if exists("g:loaded_linuxsty")
 endif
 let g:loaded_linuxsty = 1
 
+if !exists("g:linuxsty_disabled")
+    let g:linuxsty_disabled=0
+endif
+if g:linuxsty_disabled
+    finish
+endif
+
 set wildignore+=*.ko,*.mod.c,*.order,modules.builtin
 
 augroup linuxsty
